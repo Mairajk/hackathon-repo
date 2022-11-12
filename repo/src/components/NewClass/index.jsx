@@ -10,14 +10,65 @@ import {
 } from "firebase/firestore";
 
 import { getAuth } from 'firebase/auth'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 
 const NewClass = () => {
 
     const [messege, setMessege] = useState("");
+    const [classData, setClassData] = useState([]);
     const db = getFirestore();
+
+    useEffect(() => {
+        const getData = async () => {
+            const querySnapshot = await getDocs(collection(db, "Class"));
+
+            querySnapshot.forEach((doc) => {
+                console.log(`${doc.id} => `, doc.data());
+
+                setClassData((prev) => {
+
+                    let newArray = [...prev, doc.data()]
+
+                    return newArray
+                })
+
+            });
+        };
+        getData();
+
+        let unsubscribe = null;
+
+        let getRealtimeData = async () => {
+
+            const q = query(collection(db, "posts"), orderBy("createdOn", "desc"));
+
+            unsubscribe = onSnapshot(q, (querySnapshot) => {
+
+                const classData = [];
+
+                querySnapshot.forEach((doc) => {
+
+                    // posts.push(doc.data());
+
+                    classData.push({ id: doc.id, ...doc.data() });
+
+                });
+
+                setClassData(classData);
+                console.log("classData : ", classData);
+            });
+        }
+
+        getRealtimeData();
+
+        return () => {
+            console.log("CleanUp");
+            unsubscribe();
+        }
+
+    }, [])
 
 
     const formik = useFormik({
@@ -73,6 +124,8 @@ const NewClass = () => {
 
             }),
 
+
+
         onSubmit: (values, e) => {
             console.log("values : ", values);
 
@@ -81,7 +134,7 @@ const NewClass = () => {
 
                 try {
 
-                    const docRef = await addDoc(collection(db, (`Class:${values.courseName}-${values.batchNum}`))
+                    const docRef = await addDoc(collection(db, (`Class`))
                         , {
                             Data: values,
                             user: auth.currentUser.email,
@@ -107,7 +160,8 @@ const NewClass = () => {
         <div className="formDiv">
 
             <h1> Create New Class </h1>
-            <p>{messege}</p>
+
+            <p className="inputError">{messege}</p>
 
             <form onSubmit={formik.handleSubmit}>
                 <div className="inputDiv">

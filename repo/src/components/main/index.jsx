@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Navigator from "../Navigator";
 import SignIn from "../SignIn"
-
+import "./index.css"
 
 const Main = () => {
 
@@ -10,10 +10,10 @@ const Main = () => {
     return (
         <div>
             {(isSignIn) ?
-               <Navigator
-               state = {isSignIn}
-               setState = {setIsSignIn}
-               />
+                <Navigator
+                    state={isSignIn}
+                    setState={setIsSignIn}
+                />
 
                 :
 

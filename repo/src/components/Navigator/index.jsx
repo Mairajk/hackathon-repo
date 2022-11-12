@@ -12,7 +12,6 @@ const Navigator = (props) => {
 
     return (<div className="page">
         <div className="header">
-            <h1>Posting App</h1>
             {
                 <nav>
                     <ul>
@@ -23,7 +22,8 @@ const Navigator = (props) => {
                             onClick={() => {
                                 props.setState(!props.state)
                             }}>
-                            <Link to={`/`}>SignOut</Link></li>
+                            <Link to={`/`}>SignOut</Link>
+                        </li>
                     </ul>
                 </nav>
             }

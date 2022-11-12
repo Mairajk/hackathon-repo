@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+h1 {
+    width: 60%;
+    font-size: 50px;
+    text-align: center;
+    margin: 20px auto 0px;
+    background: linear-gradient(to right, seagreen 40%, blue 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* button{
+    width: 100px;
+    border-radius: 10px ;
+    font-size: 25px;
+    padding: 10px;
+    margin: 0px 20px;
+
+} */
+
+button {
+    font-size: 25px;
+    padding: 10px;
+    color: white;
+    border: 2px solid white;
+    background-color: seagreen;
+    border-radius: 10px;
+    /* font-weight: 600; */
+    outline: none;
+}
+
+button:is(:focus, :hover) {
+    outline: none;
+    font-size: 28px;
+    padding: 15px;
+    color: white;
+    font-weight: 500;
+    background: linear-gradient(to right top, seagreen 40%, blue 90%);
+    border-radius: 30px;
+    border: 01px solid blue;
+    transition: 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0px 0px 5px 5px blue;
+}
+
+
+nav {
+    /* margin: 30px 0px; */
+    background-color: aliceblue;
+    padding: 20px 0px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+}
+
+nav>ul {
+    display: flex;
+    justify-content: right;
+    margin-right: 50px;
+}
+
+nav>ul>li {
+    margin: 0px 20px 0px 30px;
+    list-style-type: none;
+    padding: 5px 5px;
+    height: 30px;
+}
+
+nav>ul a {
+    text-decoration: none;
+    color: seagreen;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+nav>ul li:hover {
+    text-decoration: none;
+    color: seagreen;
+    border-bottom: 2px solid blue;
+}
+
+form {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formDiv {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    /* align-items: center; */
+}
+
+form>div {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    /* align-items: center; */
+    /* flex-wrap: wrap; */
+    width: 80%;
+    padding: 10px;
+    margin: 10px auto;
+    /* align-items: center; */
+    border-radius: 20px;
+
+}
+
+input {
+    all: unset;
+    width: 100%;
+    height: 50px;
+    border: 2px solid seagreen;
+    display: flex;
+    padding: 5px 20px;
+    border-radius: 15px;
+}
+
+input::placeholder {
+    color: blue;
+}
+
+input:focus {
+    box-shadow: 0px 0px 5px 2px seagreen;
+    background-color: aliceblue;
+    /* border: 5px solid red; */
+}
+
+label {
+    margin: 10px 0px;
+    font-size: 25px;
+    color: blue;
+}
+
+.inputError {
+    color: red;
+    font-size: 20px;
+    text-transform: capitalize;
+
+}
