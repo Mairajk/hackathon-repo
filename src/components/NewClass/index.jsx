@@ -10,12 +10,13 @@ import {
 } from "firebase/firestore";
 
 import { getAuth } from 'firebase/auth'
+import { useState } from "react";
 
 
 
 const NewClass = () => {
 
-
+    const [messege, setMessege] = useState("");
     const db = getFirestore();
 
 
@@ -72,7 +73,7 @@ const NewClass = () => {
 
             }),
 
-        onSubmit: (values) => {
+        onSubmit: (values, e) => {
             console.log("values : ", values);
 
             const savaData = async () => {
@@ -80,12 +81,15 @@ const NewClass = () => {
 
                 try {
 
-                    const docRef = await addDoc(collection(db, "Class"), {
-                        Data: values,
-                        user: auth.currentUser.email,
-                        createdOn: serverTimestamp(),
-                    });
+                    const docRef = await addDoc(collection(db, (`Class:${values.courseName}-${values.batchNum}`))
+                        , {
+                            Data: values,
+                            user: auth.currentUser.email,
+                            createdOn: serverTimestamp(),
+                        });
                     console.log("Document written with ID: ", docRef.id);
+                    setMessege("Class added successfully. ")
+                    e.resetForm;
 
                 } catch (e) {
                     console.error("Error adding document: ", e);
@@ -103,6 +107,8 @@ const NewClass = () => {
         <div className="formDiv">
 
             <h1> Create New Class </h1>
+            <p>{messege}</p>
+
             <form onSubmit={formik.handleSubmit}>
                 <div className="inputDiv">
                     <label htmlFor="teacherName">TeacherName : </label>
