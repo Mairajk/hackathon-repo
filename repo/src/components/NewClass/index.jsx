@@ -89,7 +89,7 @@ const NewClass = () => {
                         });
                     console.log("Document written with ID: ", docRef.id);
                     setMessege("Class added successfully. ")
-                    e.resetForm;
+                    // e.resetForm;
 
                 } catch (e) {
                     console.error("Error adding document: ", e);
