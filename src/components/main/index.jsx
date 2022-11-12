@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Navigator from "../Navigator";
 import SignIn from "../SignIn"
 
 
@@ -9,8 +10,10 @@ const Main = () => {
     return (
         <div>
             {(isSignIn) ?
-               
-               " "
+               <Navigator
+               state = {isSignIn}
+               setState = {setIsSignIn}
+               />
 
                 :
 

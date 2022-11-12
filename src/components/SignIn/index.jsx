@@ -1,9 +1,12 @@
 import { useFormik } from "formik"
 import * as yup from 'yup';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+
+
 import { useState } from "react";
 
-
+// const app = initializeApp(firebaseConfig);
+// const auth = getAuth(app);
 
 
 const SignIn = (props) => {
@@ -13,6 +16,7 @@ const SignIn = (props) => {
     // const [password, setPassword] = useState("");
     const [updateError, setUpdateError] = useState("");
 
+    const auth = getAuth();
 
     const formik = useFormik({
         initialValues: {
@@ -42,10 +46,9 @@ const SignIn = (props) => {
             console.log("Hello");
 
             const auth = getAuth();
-
             signInWithEmailAndPassword(auth, values.email, values.password)
-                .then((userCredential) => {
-
+           
+            .then((userCredential) => {
                     (() => {
                         let newVar = !props.state
                         props.setState(newVar);

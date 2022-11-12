@@ -1,13 +1,10 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+
+import './App.css';
 import Main from './components/main';
-// import SignIn from './components/SignIn'
 
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-
-
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBbWyuNMhR5U7MHXtTWkzxLGkIF93pE1zA",
@@ -20,8 +17,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
-
+const db = getFirestore(app);
 
 function App() {
 
@@ -31,6 +27,7 @@ function App() {
 
       <h1>Hello world</h1>
       <Main />
+
 
     </div>
   )
