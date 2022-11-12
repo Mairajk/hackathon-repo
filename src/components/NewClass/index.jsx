@@ -1,11 +1,24 @@
 import { useFormik } from "formik"
 import * as yup from 'yup';
 
-// import { initializeApp } from "firebase/app";
-// import { getFirestore } from "firebase/firestore";
+import {
+    getFirestore, collection,
+    addDoc, getDocs, doc,
+    onSnapshot, query, serverTimestamp,
+    orderBy, deleteDoc, updateDoc, where
+
+} from "firebase/firestore";
+
+import { getAuth } from 'firebase/auth'
+
 
 
 const NewClass = () => {
+
+
+    const db = getFirestore();
+
+
     const formik = useFormik({
         initialValues: {
             teacherName: "",
@@ -61,8 +74,27 @@ const NewClass = () => {
 
         onSubmit: (values) => {
             console.log("values : ", values);
-            console.log("Hello");
 
+            const savaData = async () => {
+                const auth = getAuth();
+
+                try {
+
+                    const docRef = await addDoc(collection(db, "Class"), {
+                        Data: values,
+                        user: auth.currentUser.email,
+                        createdOn: serverTimestamp(),
+                    });
+                    console.log("Document written with ID: ", docRef.id);
+
+                } catch (e) {
+                    console.error("Error adding document: ", e);
+                }
+
+
+            }
+
+            savaData();
         }
     });
 

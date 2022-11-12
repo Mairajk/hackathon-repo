@@ -5,15 +5,10 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
 import { useState } from "react";
 
-// const app = initializeApp(firebaseConfig);
-// const auth = getAuth(app);
-
 
 const SignIn = (props) => {
 
 
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
     const [updateError, setUpdateError] = useState("");
 
     const auth = getAuth();
@@ -47,8 +42,8 @@ const SignIn = (props) => {
 
             const auth = getAuth();
             signInWithEmailAndPassword(auth, values.email, values.password)
-           
-            .then((userCredential) => {
+
+                .then((userCredential) => {
                     (() => {
                         let newVar = !props.state
                         props.setState(newVar);
